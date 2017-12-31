@@ -1,0 +1,59 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    height: 100%;
+    position: relative;
+}
+
+#map {
+    height: 100%;
+    left: 362px;
+    position: absolute;
+    right: 0px;
+}
+
+.search-area {
+    font-size: 1.0em;
+}
+
+.search-area {
+    float: left;
+    max-height: 100%;
+    overflow: auto;
+    z-index: 2;
+    background-color: #ffffff;
+    opacity: 0.8;
+    margin: 25px;
+}
+
+.location-list {
+    padding: 0;
+    margin: 5px;
+}
+
+.search-input {
+    padding: 10px;
+    font-size: 1em;
+}
+
+.location-item {
+    padding: 5px;
+    margin: 0;
+    background-color: #ffffff;
+    list-style-type: none;
+    border: solid #fcbe2c 1px;
+}
+
+.location-item:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.tips li {
+    padding-bottom: 10px;
+}

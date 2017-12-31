@@ -14,12 +14,12 @@ A simple map application displaying with marker. On clicking marker you can see 
 
 5. Foursquare API
 
-## API used:
+## API used
 
 Google Map API used to get the map functionality based on latitude and longitude. Google API reference can be get from [here](https://console.cloud.google.com/). For using Google API you need your own API Key.
 
 
-Foursquare API is used to get the *venueid* based on latitude and longitude. Right now it is hardcoded in *main.js*. Based on *venueid* I'm getting recent comments of the places. You need your own Foursquare API Client Id and Client Secret. You can get this from [here](https://foursquare.com/developers/).
+Foursquare API is used to get the *venueid* based on latitude and longitude. Right now it is hardcoded in *main.js*. Based on *venueid* I'm getting recent comments of the places. You need your own Foursquare API Client Id and Client Secret. You can get this from [here](https://developer.foursquare.com/).
 
 ## Set Up
 
