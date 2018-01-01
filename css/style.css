@@ -57,3 +57,10 @@ body {
 .tips li {
     padding-bottom: 10px;
 }
+
+.errorMsg {
+    color: red;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+}

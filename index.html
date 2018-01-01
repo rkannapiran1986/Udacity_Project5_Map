@@ -7,6 +7,10 @@
 
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/knockout-3.4.2.js"></script>
+
+    <!-- Loading appicaltion settings -->
+    <script async defer onerror="mapError()" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xyoSu8u1lTUqNuIRdVSc2bkF46bVsiA&v=3&callback=initMap"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -27,24 +31,6 @@
         <div id="map"></div>
     </div>
 
-    <!-- Script to init Map -->
-    <script>
-        var map;
-
-        function initMap() {
-            // Constructor to create a new map JS object.
-            //13.08268,80.270718 - Chennai - Tamilnadu, India
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: 13.08268,
-                    lng: 80.270718
-                },
-                zoom: 12
-            });
-        }
-    </script>
-    <!-- Loading appicaltion settings -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xyoSu8u1lTUqNuIRdVSc2bkF46bVsiA&v=3&callback=initMap"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 
