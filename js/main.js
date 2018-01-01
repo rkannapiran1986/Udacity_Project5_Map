@@ -90,7 +90,6 @@ function initMap() {
 
     // Location model
     var locationsModel = {
-
         locations: [
             new LocationFn('Ega Theatre', 13.077873, 80.240464, '4cf22a8d6c29236a042e6aa2', 'Movie Theater'),
             new LocationFn('Satyam Cinemas', 13.055368, 80.257967, '4b7fba44f964a520073b30e3', 'Movie Theater'),
@@ -98,10 +97,15 @@ function initMap() {
             new LocationFn('Thalpakatti', 12.977411, 80.219264, '4ce69e38948f224b8af8e45d', 'Food'),
             new LocationFn('Sangeetha Veg', 12.987955, 80.218705, '4cc010319ca85481a600ba16', 'Food')
         ],
-
-        query: ko.observable(''),
+        query: ko.observable('')
     };
 
+    locationsModel.availablePlaces = ko.dependentObservable(function() {
+        var self = this;
+        return ko.utils.arrayFilter(self.locations, function(location) {
+            return location.title.toLowerCase();
+        });
+    }, locationsModel);
 
     // Search function for filtering
     locationsModel.search = ko.dependentObservable(function() {
