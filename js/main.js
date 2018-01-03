@@ -20,6 +20,8 @@ function initMap() {
         this.lat = data.lat;
         this.venueId = data.venueId;
         this.cat = data.cat;
+		// By default every marker will be visible
+		this.visible = ko.observable(true);
 		
 		/*this.title = title;
         this.lng = lng;
@@ -78,6 +80,16 @@ function initMap() {
             icon: self.icon,
             animation: google.maps.Animation.DROP
         });
+		
+		//Display function for marker
+		this.showMarker = ko.computed(function() {
+			if(this.visible() === true) {
+				this.marker.setMap(map);
+			} else {
+				this.marker.setMap(null);
+			}
+			return true;
+		}, this);
 
         // Opens the info window for the location marker.
         this.openInfowindow = function() {
@@ -87,10 +99,20 @@ function initMap() {
             map.panTo(self.marker.getPosition());
 
             //Setting content in map popup
-			console.log(self.marker.icon);
             self.infowindow.setContent(self.content);
             self.infowindow.open(map, self.marker);
+			
+			//Animate the selected marker
+			self.marker.setAnimation(google.maps.Animation.BOUNCE);
+			setTimeout(function() {
+				self.marker.setAnimation(null);
+			}, 2100);
         };
+		
+		// Animate whenever we clicking the marker
+		this.bounce = function(place) {
+			google.maps.event.trigger(self.marker, 'click');
+		};
 
         // Assigns a click event for marker
         this.addListener = google.maps.event.addListener(self.marker, 'click', (this.openInfowindow));
@@ -149,7 +171,6 @@ function initMap() {
 		locations : locationsArr,
 		query: ko.observable('')
 	};
-	console.log(locationsModel);
 
     locationsModel.availablePlaces = ko.computed(function() {
         var self = this;
@@ -161,10 +182,24 @@ function initMap() {
     // Search function for filtering
     locationsModel.search = ko.computed(function() {
         var self = this;
-        var search = this.query().toLowerCase();
+        /*var search = this.query().toLowerCase();
         return ko.utils.arrayFilter(self.locations, function(location) {
             return location.title.toLowerCase().indexOf(search) >= 0;
-        });
+        });*/
+		var filter = this.query().toLowerCase();
+		if (!filter) {
+            self.locations.forEach(function(locationItem) {
+                locationItem.visible(true);
+            });
+            return self.locations;
+        } else {
+            return ko.utils.arrayFilter(self.locations, function(locationItem) {
+                var string = locationItem.title.toLowerCase();
+                var result = (string.search(filter) >= 0);
+                locationItem.visible(result);
+                return result;
+            });
+        }
     }, locationsModel);
 
     ko.applyBindings(locationsModel);
