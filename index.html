@@ -12,49 +12,43 @@
 </head>
 
 <body>
-	<div id="mySidenav" class="sidenav">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<br /><br />
-		<input class="search-input" placeholder="Search here for Places..." type="text" name="q" data-bind="value: query, valueUpdate: 'keyup'">
-		<ul class="location-list" data-bind="visible:query, template: {name: 'location', foreach: search}"></ul>
-		
-		<h3>Available Places:</h3>
-		<ul data-bind="foreach: availablePlaces">
-			<li><span data-bind="text: title"></span></li>
-		</ul>
-		<script type="text/html" id="location">
-			<li class="location-item" data-bind="text: title, click: openInfowindow"></li>
-		</script>
-	</div>
+    <header role="banner">
+        <div id="logo">
+            Udacity Map Project - Kannapiran R
+        </div>
 
-	<span class="lftIcon" onclick="openNav()">&#9776;</span>
-
-    <div class="container">
-        <!-- <div class="left-panel">
-            <div class="search-area" id="search-area">
+        <nav id="primary-nav">
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <br /><br />
                 <input class="search-input" placeholder="Search here for Places..." type="text" name="q" data-bind="value: query, valueUpdate: 'keyup'">
-                <ul class="location-list" data-bind="visible:query, template: {name: 'location', foreach: search}">
-                </ul>
+                <ul class="location-list" data-bind="visible:query, template: {name: 'location', foreach: search}"></ul>
 
                 <h3>Available Places:</h3>
                 <ul data-bind="foreach: availablePlaces">
-                    <li>
-                        <span data-bind="text: title"></span>
-                    </li>
+                    <li class="aLink"><span data-bind="text: title, click: openInfowindow"></span></li>
                 </ul>
+                <script type="text/html" id="location">
+                    <li class="location-item" data-bind="text: title, click: openInfowindow"></li>
+                </script>
             </div>
+            <span class="lftIcon" onclick="openNav()">&#9776;</span>
+        </nav>
+    </header>
 
-            <script type="text/html" id="location">
-                <li class="location-item" data-bind="text: title, click: openInfowindow"></li>
-            </script>
-        </div> -->
-
+    <div class="container">
         <!-- Render Map -->
         <div id="map"></div>
     </div>
-	
-<!-- Loading appicaltion settings -->
-    <script async defer onerror="mapError()" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xyoSu8u1lTUqNuIRdVSc2bkF46bVsiA&v=3&callback=initMap"></script>
+
+    <footer id="page-footer">
+        <p>-Udacity Project - Kannapiran</p>
+    </footer>
+
     <script type="text/javascript" src="js/main.js"></script>
+
+    <!-- Loading appicaltion settings -->
+    <script async defer onerror="mapError()" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xyoSu8u1lTUqNuIRdVSc2bkF46bVsiA&v=3&callback=initMap"></script>
 </body>
+
 </html>

@@ -66,8 +66,8 @@ body {
 }
 
 
-
 /* Side Nav - Start */
+
 .sidenav {
     height: 100%;
     width: 0;
@@ -79,7 +79,7 @@ body {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
-	color: #ffffff;
+    color: #ffffff;
 }
 
 .sidenav a {
@@ -104,11 +104,28 @@ body {
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
 }
 
-.lftIcon{
-	font-size:30px;cursor:pointer
+.lftIcon {
+    font-size: 30px;
+    cursor: pointer
 }
+
+.aLink {
+    cursor: pointer
+}
+
+#logo {
+    font-size: 2em;
+    text-align: center;
+    padding-top: 10px;
+}
+
+
 /* Side Nav - End */
