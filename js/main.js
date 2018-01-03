@@ -12,13 +12,20 @@ function initMap() {
     });
 
     // Location function used for marker.
-    var LocationFn = function(title, lng, lat, venueId, cat) {
+    //var LocationFn = function(title, lng, lat, venueId, cat) {
+	var LocationFn = function(data) {
         var self = this;
-        this.title = title;
+        this.title = data.title;
+        this.lng = data.lng;
+        this.lat = data.lat;
+        this.venueId = data.venueId;
+        this.cat = data.cat;
+		
+		/*this.title = title;
         this.lng = lng;
         this.lat = lat;
         this.venueId = venueId;
-        this.cat = cat;
+        this.cat = cat;*/
 
         // getInfoContent function retrieves 5 most recent tips from foursquare for the marker location.
         this.getInfoContent = function() {
@@ -80,6 +87,7 @@ function initMap() {
             map.panTo(self.marker.getPosition());
 
             //Setting content in map popup
+			console.log(self.marker.icon);
             self.infowindow.setContent(self.content);
             self.infowindow.open(map, self.marker);
         };
@@ -89,7 +97,40 @@ function initMap() {
     };
 
     // Location model
-    var locationsModel = {
+	let tempLocations = [{
+			title: 'Ega Theater',
+			lng: 13.077873, 
+			lat: 80.240464,
+			venueId: '4cf22a8d6c29236a042e6aa2',
+			cat:'Movie Theater'
+		},{
+			title: 'Satyam Cinemas',
+			lng: 13.055368,
+			lat: 80.257967,
+			venueId: '4b7fba44f964a520073b30e3',
+			cat:'Movie Theater'
+		},{
+			title: 'Fort Museum',
+			lng: 13.079589,
+			lat: 80.287452,
+			venueId: '4cb9863b90c9a143bac487d6',
+			cat: 'Visit'
+		},{
+			title: 'Thalpakatti',
+			lng: 12.977411,
+			lat: 80.219264,
+			venueId: '4ce69e38948f224b8af8e45d',
+			cat:'Food'
+		},{
+			title: 'Sangeetha Veg',
+			lng: 12.987955,
+			lat: 80.218705,
+			venueId: '4cc010319ca85481a600ba16',
+			cat:'Food'
+		}
+	];
+	
+    /*var locationsModel = {
         locations: [
             new LocationFn('Ega Theatre', 13.077873, 80.240464, '4cf22a8d6c29236a042e6aa2', 'Movie Theater'),
             new LocationFn('Satyam Cinemas', 13.055368, 80.257967, '4b7fba44f964a520073b30e3', 'Movie Theater'),
@@ -98,9 +139,19 @@ function initMap() {
             new LocationFn('Sangeetha Veg', 12.987955, 80.218705, '4cc010319ca85481a600ba16', 'Food')
         ],
         query: ko.observable('')
-    };
+    };*/
+	
+	var locationsArr = [];
+	for(let i=0; i<tempLocations.length; i++){
+		locationsArr.push(new LocationFn(tempLocations[i]));
+	}
+	var locationsModel = {
+		locations : locationsArr,
+		query: ko.observable('')
+	};
+	console.log(locationsModel);
 
-    locationsModel.availablePlaces = ko.dependentObservable(function() {
+    locationsModel.availablePlaces = ko.computed(function() {
         var self = this;
         return ko.utils.arrayFilter(self.locations, function(location) {
             return location.title.toLowerCase();
@@ -108,7 +159,7 @@ function initMap() {
     }, locationsModel);
 
     // Search function for filtering
-    locationsModel.search = ko.dependentObservable(function() {
+    locationsModel.search = ko.computed(function() {
         var self = this;
         var search = this.query().toLowerCase();
         return ko.utils.arrayFilter(self.locations, function(location) {
