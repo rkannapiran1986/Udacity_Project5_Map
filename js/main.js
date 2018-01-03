@@ -208,3 +208,11 @@ function initMap() {
 function mapError() {
     $('#map').html('<span class="errorMsg">Sorry, some issue with map.</span>');
 }
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
